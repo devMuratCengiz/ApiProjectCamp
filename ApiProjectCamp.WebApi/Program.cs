@@ -1,4 +1,7 @@
 using ApiProjectCamp.WebApi.Context;
+using ApiProjectCamp.WebApi.Entities;
+using ApiProjectCamp.WebApi.ValidationRules;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using System.Reflection;
@@ -11,6 +14,8 @@ builder.Services.AddDbContext<ApiContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
+
+builder.Services.AddScoped<IValidator<Product>, ProductValidator>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
